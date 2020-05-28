@@ -6,7 +6,7 @@ type ScreenPropsType = {
 }
 
 function Screen({count,error}:ScreenPropsType) {
-    return <div className={`screen ${error?"error":""}`}>{count}</div>
+    return <div className={`${error?"error-screen":"screen"}`}>{count}</div>
 
 }
 

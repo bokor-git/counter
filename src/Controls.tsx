@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 
 
 type ControlsPropsType = {
@@ -10,7 +10,7 @@ type ControlsPropsType = {
 
 function Controls({changeCount, resetCount, error,count}:ControlsPropsType) {
     return <div className="controls">
-        <button disabled={error} onClick={changeCount}>INC</button>
+        <button disabled={count===5} onClick={changeCount}>INC</button>
         <button disabled={count===0} onClick={resetCount}>RESET</button>
     </div>
 

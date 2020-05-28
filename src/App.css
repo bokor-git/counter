@@ -1,47 +1,69 @@
 .App {
     height: 100vh;
-  text-align: center;
-  display: flex;
-  justify-content: center;
+    text-align: center;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    background-color: powderblue;
+    background-color: #17232b;
 }
 
-.error{
-  color: red;
+.error-screen {
+    color: red;
+    font-family: Impact, sans-serif;
+    height: 55%;
+    width: 90%;
+    border-radius: 10px;
+    background-color: #17232b;
+    font-size: 50px;
+    border: lightseagreen 3px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .counter {
-  border-radius: 10px;
-  background-color: lightslategrey;
-  border: 3px solid blue;
-  width: 200px;
-  height: 250px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+    border-radius: 10px;
+    background-color: #17232b;
+    border: 3px solid lightseagreen;
+    width: 450px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
 
 
-.screen{
-  border-radius: 10px;
-  background-color: lightskyblue;
-  height: 60px;
-  font-size: 40px;
+.screen {
+    color: lightseagreen;
+    font-family: Impact, sans-serif;
+    height: 55%;
+    width: 90%;
+    border-radius: 10px;
+    background-color: #17232b;
+    font-size: 50px;
+    border: lightseagreen 3px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.controls{
- height: 80px;
-  border-radius: 10px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  border: 2px snow solid;
+.controls {
+    width: 90%;
+    height: 25%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: lightseagreen 3px solid;
 }
 
 .controls button {
-  border-radius:10px;
-  width: 80px;
-  height: 50px;
-font-size: 20px;
+    font-family: Impact, sans-serif;
+    background-color: lightseagreen;
+    border: 1px lightseagreen solid;
+    border-radius: 10px;
+    width: 110px;
+    height: 50px;
+    font-size: 30px;
 }
