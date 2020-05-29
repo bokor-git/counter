@@ -10,8 +10,13 @@ function App() {
 
     //count===5?setError(true):setError(false) ERROR maximum render loop
 
-    useEffect(() => errorCheck(), [count])
-    const errorCheck = () => count === maxValue ? setError(true) : setError(false)
+    let [starValue, setStarValue] = useState<number>(0)
+    let [maxValue, setMaxValue] = useState<number>(0)
+
+    let [inputValueError, setInputValueError] = useState<boolean>(false)
+
+    useEffect(() => errorCheck(), [count, maxValue])
+    const errorCheck = () => count === maxValue || starValue >= maxValue ? setError(true) : setError(false)
 
     const changeCount = () => {
         if (error === false) {
@@ -24,10 +29,8 @@ function App() {
         setError(false)
     }
 
-    let [starValue, setStarValue] = useState<number>(0)
-    let [maxValue, setMaxValue] = useState<number | null>(null)
 
-    const setSettings = (start: number, max: number | null) => {
+    const setSettings = (start: number, max: number) => {
         setStarValue(start)
         setMaxValue(max)
         setCount(start)
@@ -35,7 +38,8 @@ function App() {
 
     return (
         <div className="App">
-            <Counter starValue={starValue}
+            <Counter inputValueError={inputValueError}
+                     starValue={starValue}
                      count={count}
                      changeCount={changeCount}
                      resetCount={resetCount}
@@ -44,6 +48,8 @@ function App() {
                      maxValue={maxValue}
             />
             <Settings
+                inputValueError={inputValueError}
+                setInputValueError={setInputValueError}
                 setSettings={setSettings}
             />
         </div>

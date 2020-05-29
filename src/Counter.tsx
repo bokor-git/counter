@@ -9,17 +9,19 @@ type CounterPropsType = {
     error: boolean
     setError: (value: boolean) => void
     starValue: number
-    maxValue: number | null
+    maxValue: number
+    inputValueError: boolean
 }
 
-
-export function Counter({count, changeCount, resetCount, error, starValue, maxValue}: CounterPropsType) {
+export function Counter({count, changeCount, resetCount, error, starValue, maxValue, inputValueError}: CounterPropsType) {
 
     // if (count === 5) {setError(true)} works good
     return <div className="counter">
-        <Screen starValue={starValue}
+        <Screen inputValueError={inputValueError}
+                starValue={starValue}
                 count={count}
-                error={error}/>
+                error={error}
+                maxValue={maxValue}/>
         <Controls changeCount={changeCount}
                   resetCount={resetCount}
                   error={error}

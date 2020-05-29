@@ -1,14 +1,20 @@
 import React, {ChangeEvent, useState} from "react";
 
 type SettingsPropsType = {
-    setSettings: (start: number, max: number | null) => void
+    setSettings: (start: number, max: number) => void
+    setInputValueError: (value: boolean) => void
+    inputValueError: boolean
 }
 
-export function Settings({setSettings}: SettingsPropsType) {
+export function Settings({setSettings, setInputValueError, inputValueError}: SettingsPropsType) {
 
 
-    let [maxInputValue, setMaxInputValue] = useState<number | null>(null)
+    let [maxInputValue, setMaxInputValue] = useState<number>(0)
     let [startInputValue, setStartInputValue] = useState<number>(0)
+
+    if (startInputValue >= maxInputValue || startInputValue < 0) {
+        setInputValueError(true)
+    } else setInputValueError(false)
 
     const settings = () => {
         setSettings(startInputValue, maxInputValue)
@@ -23,10 +29,12 @@ export function Settings({setSettings}: SettingsPropsType) {
 
     return <div className="counter">
         <div className="screen-settings">
-            <div className="input-settings"><span>max value:</span>
-                <input type="number" step={1} onChange={setMax}/></div>
-            <div className="input-settings"><span>start value:</span>
-                <input type="number" step={1} onChange={setStart}/></div>
+            <div className={inputValueError ? "input-settings-error input-settings" : "input-settings"}>
+                <span>max value:</span>
+                <input value={maxInputValue} type="number" step={1} onChange={setMax}/></div>
+            <div className={inputValueError ? "input-settings-error input-settings" : "input-settings"}>
+                <span>start value:</span>
+                <input value={startInputValue} type="number" step={1} onChange={setStart}/></div>
         </div>
         <div className="controls">
             <button onClick={settings}>SET</button>

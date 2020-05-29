@@ -92,9 +92,17 @@
     text-align: center;
 }
 
+.input-settings-error input {
+    border: 3px red solid;
+    text-align: center;
+    color: red;
+    background-color: tomato;
+}
+
 .input-settings {
     width: 100%;
     display: flex;
     justify-content: space-around;
 }
+
 
