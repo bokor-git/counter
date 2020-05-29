@@ -1,29 +1,32 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 
-type CounterPropsType = {
-    count: number
-    changeCount: () => void
-    resetCount: () => void
-    error: boolean
-    setError: (value: boolean) => void
+type SettingsPropsType = {
+    setStart: (value: number) => void
+    setMax: (value: number) => void
 }
 
 
-export function Settings({count, changeCount, resetCount, error, setError}: CounterPropsType) {
+export function Settings({setStart, setMax}: SettingsPropsType) {
 
 
 
+    const max = (e: ChangeEvent<HTMLInputElement>) => {
+        setMax(Number(e.currentTarget.value))
+    }
+    const start = (e: ChangeEvent<HTMLInputElement>) => {
+        setStart(Number(e.currentTarget.value))
+    }
 
     return <div className="counter">
-        <div className="screen-settings">
-          <div className="input-settings">  <span>max value:</span>
-              <input type="number" step={1}/></div>
-           <div className="input-settings"><span>start value:</span>
-               <input type="number" step={1}/></div>
-        </div>
-        <div className="controls">
-            <button>SET</button>
-        </div>
+            <div className="screen-settings">
+                <div className="input-settings"><span>max value:</span>
+                    <input type="number" step={1} onChange={max} /></div>
+                <div className="input-settings"><span>start value:</span>
+                    <input type="number" step={1} onChange={start}/></div>
+            </div>
+            <div className="controls">
+                <button>SET</button>
+            </div>
     </div>
 
 }

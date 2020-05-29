@@ -6,12 +6,14 @@ type ControlsPropsType = {
     resetCount:()=>void
     error: boolean
     count: number
+    maxValue: number
+    starValue:number
 }
 
-function Controls({changeCount, resetCount, error,count}:ControlsPropsType) {
+function Controls({changeCount, resetCount, error,count,maxValue,starValue}:ControlsPropsType) {
     return <div className="controls">
-        <button disabled={count===5} onClick={changeCount}>INC</button>
-        <button disabled={count===0} onClick={resetCount}>RESET</button>
+        <button disabled={count+starValue===maxValue} onClick={changeCount}>INC</button>
+        <button disabled={count===starValue+count} onClick={resetCount}>RESET</button>
     </div>
 
 }
