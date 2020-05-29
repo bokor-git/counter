@@ -11,11 +11,11 @@ type ScreenPropsType = {
 
 function Screen({count, error, starValue, maxValue, inputValueError}: ScreenPropsType) {
     return <div className={`${error || inputValueError ? "error-screen" : "screen"}`}>
-        {inputValueError ? "Incorrect values!" : count}
-
+        <div>
+            {starValue === 0 && maxValue === 0 ? <div className="start">Set settings!</div>
+                : inputValueError ? "Incorrect values!" : count}
+        </div>
     </div>
-
-
 }
 
 export default Screen
