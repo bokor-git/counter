@@ -2,9 +2,10 @@
     height: 100vh;
     text-align: center;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     background-color: #17232b;
+    flex-direction: row-reverse;
 }
 
 .error-screen {
@@ -67,3 +68,33 @@
     height: 50px;
     font-size: 30px;
 }
+
+.screen-settings {
+    color: lightseagreen;
+    font-family: Impact, sans-serif;
+    height: 55%;
+    width: 90%;
+    border-radius: 10px;
+    background-color: #17232b;
+    font-size: 40px;
+    border: lightseagreen 3px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.screen-settings input {
+    font-size: 30px;
+    width: 100px;
+    border: 3px lightseagreen solid;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.input-settings {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
