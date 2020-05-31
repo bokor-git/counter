@@ -3,15 +3,14 @@ import './App.css';
 import {Counter} from "./Counter";
 import {Settings} from "./Settings";
 
+
 function App() {
 
     let [count, setCount] = useState<number>(0)
     let [error, setError] = useState<boolean>(false)
 
-    //count===5?setError(true):setError(false) ERROR maximum render loop
-
-    let [starValue, setStarValue] = useState<number>(0)
-    let [maxValue, setMaxValue] = useState<number>(0)
+    let [starValue, setStarValue] = useState<number>(Number(localStorage.getItem('max')))
+    let [maxValue, setMaxValue] = useState<number>(Number(localStorage.getItem('start')))
 
     let [inputValueError, setInputValueError] = useState<boolean>(false)
 
@@ -29,11 +28,11 @@ function App() {
         setError(false)
     }
 
-
     const setSettings = (start: number, max: number) => {
         setStarValue(start)
         setMaxValue(max)
         setCount(start)
+
     }
 
     return (
@@ -48,6 +47,7 @@ function App() {
                      maxValue={maxValue}
             />
             <Settings
+                starValue={starValue}
                 inputValueError={inputValueError}
                 setInputValueError={setInputValueError}
                 setSettings={setSettings}
