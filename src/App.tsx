@@ -6,11 +6,15 @@ import {Settings} from "./Settings";
 
 function App() {
 
+
+    let storageStartValue = Number(localStorage.getItem('start'))
+    let storageMaxValue = Number(localStorage.getItem('max'))
+
     let [count, setCount] = useState<number>(0)
     let [error, setError] = useState<boolean>(false)
 
-    let [starValue, setStarValue] = useState<number>(Number(localStorage.getItem('max')))
-    let [maxValue, setMaxValue] = useState<number>(Number(localStorage.getItem('start')))
+    let [starValue, setStarValue] = useState<number>(storageStartValue)
+    let [maxValue, setMaxValue] = useState<number>(storageMaxValue)
 
     let [inputValueError, setInputValueError] = useState<boolean>(false)
 
@@ -32,7 +36,8 @@ function App() {
         setStarValue(start)
         setMaxValue(max)
         setCount(start)
-
+        localStorage.setItem("start", start.toString());
+        localStorage.setItem("max", max.toString());
     }
 
     return (
@@ -51,6 +56,8 @@ function App() {
                 inputValueError={inputValueError}
                 setInputValueError={setInputValueError}
                 setSettings={setSettings}
+                storageStartValue={storageStartValue}
+                storageMaxValue={storageMaxValue}
             />
         </div>
     );

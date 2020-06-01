@@ -15,7 +15,6 @@ type CounterPropsType = {
 
 export function Counter({count, changeCount, resetCount, error, starValue, maxValue, inputValueError}: CounterPropsType) {
 
-    // if (count === 5) {setError(true)} works good
     return <div className="counter">
         <Screen inputValueError={inputValueError}
                 starValue={starValue}

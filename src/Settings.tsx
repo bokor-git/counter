@@ -5,30 +5,26 @@ type SettingsPropsType = {
     setInputValueError: (value: boolean) => void
     inputValueError: boolean
     starValue: number
+    storageStartValue:number,
+    storageMaxValue: number
 }
 
-export function Settings({setSettings, setInputValueError, inputValueError}: SettingsPropsType) {
+export function Settings({setSettings, setInputValueError, inputValueError,storageStartValue,storageMaxValue}: SettingsPropsType) {
 
     useEffect(() => settings(), [])
 
-    let [maxInputValue, setMaxInputValue] = useState<number>(Number(localStorage.getItem('max')))
-    let [startInputValue, setStartInputValue] = useState<number>(Number(localStorage.getItem('start')))
+    let [maxInputValue, setMaxInputValue] = useState<number>(storageMaxValue||0)
+    let [startInputValue, setStartInputValue] = useState<number>(storageStartValue||0)
 
     if (startInputValue >= maxInputValue || startInputValue < 0) {
         setInputValueError(true)
     } else setInputValueError(false)
 
-    const settings = () => {
-        setSettings(startInputValue, maxInputValue)
-        localStorage.setItem("start", startInputValue.toString());
-        localStorage.setItem("max", maxInputValue.toString());
-    }
-    const setMax = (e: ChangeEvent<HTMLInputElement>) => {
-        setMaxInputValue(Number(e.currentTarget.value))
-    }
-    const setStart = (e: ChangeEvent<HTMLInputElement>) => {
-        setStartInputValue(Number(e.currentTarget.value))
-    }
+    const settings = () => setSettings(startInputValue, maxInputValue)
+    const setMax = (e: ChangeEvent<HTMLInputElement>) => setMaxInputValue(Number(e.currentTarget.value))
+    const setStart = (e: ChangeEvent<HTMLInputElement>) => setStartInputValue(Number(e.currentTarget.value))
+
+    const setButtonDisabled = maxInputValue===storageMaxValue&&startInputValue===storageStartValue;
 
     return <div className="counter">
         <div className="screen-settings">
@@ -41,7 +37,7 @@ export function Settings({setSettings, setInputValueError, inputValueError}: Set
         </div>
         <div className="controls">
             <button
-                disabled={maxInputValue === Number(localStorage.getItem('max')) && startInputValue === Number(localStorage.getItem('start'))}
+                disabled={setButtonDisabled}
                 onClick={settings}>SET
             </button>
         </div>
