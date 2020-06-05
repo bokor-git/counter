@@ -1,4 +1,5 @@
 import React, {ChangeEvent, useEffect, useState} from "react";
+import {Button} from "./Button";
 
 type SettingsPropsType = {
     setSettings: (start: number, max: number) => void
@@ -36,10 +37,7 @@ export function Settings({setSettings, setInputValueError, inputValueError,stora
                 <input value={startInputValue} type="number" step={1} onChange={setStart}/></div>
         </div>
         <div className="controls">
-            <button
-                disabled={setButtonDisabled}
-                onClick={settings}>SET
-            </button>
+            <Button onClick={settings} disabled={setButtonDisabled||inputValueError} title={"SET"}/>
         </div>
     </div>
 

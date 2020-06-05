@@ -1,4 +1,5 @@
 import React from "react";
+import {Button} from "./Button";
 
 
 type ControlsPropsType = {
@@ -12,10 +13,9 @@ type ControlsPropsType = {
 
 function Controls({changeCount, resetCount, error, count, maxValue, starValue}: ControlsPropsType) {
     return <div className="controls">
-        <button disabled={count === maxValue || error} onClick={changeCount}>INC</button>
-        <button disabled={count === starValue} onClick={resetCount}>RESET</button>
+        <Button disabled={count === maxValue || error} onClick={changeCount}  title={"INC"}/>
+        <Button disabled={count === starValue} onClick={resetCount} title={"RESET"}/>
     </div>
-
 }
 
 export default Controls
