@@ -4,22 +4,27 @@ import {Counter} from "./Counter";
 import {Settings} from "./Settings";
 import {AppStateType} from "./state/store";
 import {useDispatch, useSelector} from "react-redux";
-import {increaseCountAC, resetCountAC} from "./state/counter-reducer";
+import {
+    increaseCountAC,
+    resetCountAC,
+    setCountStartValueAC,
+    setMaxValueAC,
+    setStartValueAC
+} from "./state/counter-reducer";
 
 
 function AppRedux() {
 
 //=================> Data From LocalStorage
-    let storageStartValue = Number(localStorage.getItem('start'))
-    let storageMaxValue = Number(localStorage.getItem('max'))
 
 //=================> Counter State
     let count = useSelector<AppStateType, number>(state => state.counter.count)
     let dispatch = useDispatch()
     let [error, setError] = useState<boolean>(false)
-    let [starValue, setStarValue] = useState<number>(storageStartValue)
-    let [maxValue, setMaxValue] = useState<number>(storageMaxValue)
-
+    let starValue = useSelector<AppStateType, number>(state => state.counter.starValue)
+    let maxValue = useSelector<AppStateType, number>(state => state.counter.maxValue)
+    let storageStartValue = starValue
+    let storageMaxValue = maxValue
 //=================> Settings Error State
     let [inputValueError, setInputValueError] = useState<boolean>(false)
 
@@ -27,17 +32,20 @@ function AppRedux() {
     const errorCheck = () => count === maxValue || starValue >= maxValue ? setError(true) : setError(false)
 
     const changeCount = () => {
-        dispatch(increaseCountAC())
-    }
+        if (error === false) {
+            dispatch(increaseCountAC())
+        }
 
+    }
+    const resetToStartValue = () => dispatch(resetCountAC(starValue))
     const resetCount = () => {
-        dispatch(resetCountAC())
+        resetToStartValue()
         setError(false)
     }
-
     const setSettings = (start: number, max: number) => {
-        setStarValue(start)
-        setMaxValue(max)
+        dispatch(setCountStartValueAC(start))
+        dispatch(setMaxValueAC(max))
+        dispatch(setStartValueAC(start))
         localStorage.setItem("start", start.toString());
         localStorage.setItem("max", max.toString());
     }
