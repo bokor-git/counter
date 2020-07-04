@@ -2,16 +2,23 @@ import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Counter} from "./Counter";
 import {Settings} from "./Settings";
+import {AppStateType} from "./state/store";
+import {useDispatch, useSelector} from "react-redux";
+import {increaseCountAC} from "./state/counter-reducer";
 
 
-function App() {
+function AppRedux() {
 
 //=================> Data From LocalStorage
-    let storageStartValue = Number(localStorage.getItem('start'))
-    let storageMaxValue = Number(localStorage.getItem('max'))
+    //let storageStartValue = Number(localStorage.getItem('start'))
+    //let storageMaxValue = Number(localStorage.getItem('max'))
 
 //=================> Counter State
-    let [count, setCount] = useState<number>(0)
+    let count = useSelector<AppStateType, number>(state => state.counter.count)
+    const storageStartValue = useSelector<AppStateType, number>(state => state.counter.starValue)
+    const storageMaxValue = useSelector<AppStateType, number>(state => state.counter.maxValue)
+    let dispatch = useDispatch()
+    //let [count, setCount] = useState<number>(0)
     let [error, setError] = useState<boolean>(false)
     let [starValue, setStarValue] = useState<number>(storageStartValue)
     let [maxValue, setMaxValue] = useState<number>(storageMaxValue)
@@ -23,20 +30,17 @@ function App() {
     const errorCheck = () => count === maxValue || starValue >= maxValue ? setError(true) : setError(false)
 
     const changeCount = () => {
-        if (error === false) {
-            setCount(count + 1)
-        }
+        dispatch(increaseCountAC())
     }
 
     const resetCount = () => {
-        setCount(starValue);
+        //dispatch(increaseCountAC())
         setError(false)
     }
 
     const setSettings = (start: number, max: number) => {
         setStarValue(start)
         setMaxValue(max)
-        setCount(start)
         localStorage.setItem("start", start.toString());
         localStorage.setItem("max", max.toString());
     }
@@ -64,4 +68,4 @@ function App() {
     );
 }
 
-export default App;
+export default AppRedux;
