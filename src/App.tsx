@@ -41,27 +41,27 @@ function App() {
         localStorage.setItem("max", max.toString());
     }
 
-    return (
-        <div className="App">
-            <Counter inputValueError={inputValueError}
-                     starValue={starValue}
-                     count={count}
-                     changeCount={changeCount}
-                     resetCount={resetCount}
-                     error={error}
-                     setError={setError}
-                     maxValue={maxValue}
-            />
-            <Settings
-                starValue={starValue}
-                inputValueError={inputValueError}
-                setInputValueError={setInputValueError}
-                setSettings={setSettings}
-                storageStartValue={storageStartValue}
-                storageMaxValue={storageMaxValue}
-            />
-        </div>
-    );
+    // return (
+    //     <div className="App">
+    //         <Counter inputValueError={inputValueError}
+    //                  starValue={starValue}
+    //                  count={count}
+    //                  changeCount={changeCount}
+    //                  resetCount={resetCount}
+    //                  error={error}
+    //                  setError={setError}
+    //                  maxValue={maxValue}
+    //         />
+    //        <Settings
+    //             starValue={starValue}
+    //             inputValueError={inputValueError}
+    //             setInputValueError={setInputValueError}
+    //             setSettings={setSettings}
+    //             storageStartValue={storageStartValue}
+    //             storageMaxValue={storageMaxValue}
+    //         />
+    //     </div>
+    // );
 }
 
 export default App;

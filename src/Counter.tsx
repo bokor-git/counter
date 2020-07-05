@@ -1,32 +1,37 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Controls from "./Controls";
 import Screen from "./Screen";
+import {useSelector} from "react-redux";
+import {AppStateType} from "./state/store";
 
 type CounterPropsType = {
-    count: number
-    changeCount: () => void
-    resetCount: () => void
-    error: boolean
-    setError: (value: boolean) => void
-    starValue: number
-    maxValue: number
     inputValueError: boolean
 }
 
-export function Counter({count, changeCount, resetCount, error, starValue, maxValue, inputValueError}: CounterPropsType) {
+export function Counter({inputValueError}: CounterPropsType) {
+
+    let maxValue = useSelector<AppStateType, number>(state => state.counter.maxValue)
+    let startValue = useSelector<AppStateType, number>(state => state.counter.startValue)
+    let count = useSelector<AppStateType, number>(state => state.counter.count)
+
+    let [countIsDone, setCountIsDone] = useState<boolean>(false)
+
+    useEffect(() => errorCheck(), [count, maxValue])
+    const errorCheck = () => count === maxValue ? setCountIsDone(true) : setCountIsDone(false)
 
     return <div className="counter">
         <Screen inputValueError={inputValueError}
-                starValue={starValue}
+                starValue={startValue}
                 count={count}
-                error={error}
+                countIsDone={countIsDone}
                 maxValue={maxValue}/>
-        <Controls changeCount={changeCount}
-                  resetCount={resetCount}
-                  error={error}
-                  count={count}
-                  maxValue={maxValue}
-                  starValue={starValue}/>
+        <Controls
+            setCountIsDone={setCountIsDone}
+            countIsDone={countIsDone}
+            count={count}
+            maxValue={maxValue}
+            starValue={startValue}
+            inputValueError={inputValueError}/>
     </div>
 
 }

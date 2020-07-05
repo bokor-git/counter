@@ -1,31 +1,42 @@
 import React, {ChangeEvent, useEffect, useState} from "react";
 import {Button} from "./Button";
+import {setCountStartValueAC, setMaxValueAC, setStartValueAC} from "./state/counter-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "./state/store";
 
 type SettingsPropsType = {
-    setSettings: (start: number, max: number) => void
     setInputValueError: (value: boolean) => void
     inputValueError: boolean
-    starValue: number
-    storageStartValue:number,
-    storageMaxValue: number
 }
 
-export function Settings({setSettings, setInputValueError, inputValueError,storageStartValue,storageMaxValue}: SettingsPropsType) {
+export function Settings({setInputValueError, inputValueError}: SettingsPropsType) {
+    let maxValue = useSelector<AppStateType, number>(state => state.counter.maxValue)
+    let startValue = useSelector<AppStateType, number>(state => state.counter.startValue)
+
+    let dispatch = useDispatch()
 
     useEffect(() => settings(), [])
 
-    let [maxInputValue, setMaxInputValue] = useState<number>(storageMaxValue||0)
-    let [startInputValue, setStartInputValue] = useState<number>(storageStartValue||0)
+    const settings = () => {
+        dispatch(setCountStartValueAC(startInputValue))
+        dispatch(setMaxValueAC(maxInputValue))
+        dispatch(setStartValueAC(startInputValue))
+        localStorage.setItem("start", startInputValue.toString());
+        localStorage.setItem("max", maxInputValue.toString());
+    }
+
+    let [maxInputValue, setMaxInputValue] = useState<number>(maxValue || 0)
+    let [startInputValue, setStartInputValue] = useState<number>(startValue || 0)
 
     if (startInputValue >= maxInputValue || startInputValue < 0) {
         setInputValueError(true)
     } else setInputValueError(false)
 
-    const settings = () => setSettings(startInputValue, maxInputValue)
+
     const setMax = (e: ChangeEvent<HTMLInputElement>) => setMaxInputValue(Number(e.currentTarget.value))
     const setStart = (e: ChangeEvent<HTMLInputElement>) => setStartInputValue(Number(e.currentTarget.value))
 
-    const setButtonDisabled = maxInputValue===storageMaxValue&&startInputValue===storageStartValue;
+    const setButtonDisabled = maxInputValue === maxValue && startInputValue === startValue;
 
     return <div className="counter">
         <div className="screen-settings">
@@ -37,7 +48,7 @@ export function Settings({setSettings, setInputValueError, inputValueError,stora
                 <input value={startInputValue} type="number" step={1} onChange={setStart}/></div>
         </div>
         <div className="controls">
-            <Button onClick={settings} disabled={setButtonDisabled||inputValueError} title={"SET"}/>
+            <Button onClick={settings} disabled={setButtonDisabled || inputValueError} title={"SET"}/>
         </div>
     </div>
 
