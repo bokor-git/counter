@@ -17,7 +17,7 @@ function Controls({countIsDone, setCountIsDone, count, maxValue, starValue, inpu
 
     let dispatch = useDispatch()
     const resetCount = () => {
-        dispatch(resetCountAC(starValue))
+        dispatch(resetCountAC())
         setCountIsDone(false)
     }
     const changeCount = () => {

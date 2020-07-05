@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useEffect, useState} from "react";
 import {Button} from "./Button";
-import {setCountStartValueAC, setMaxValueAC, setStartValueAC} from "./state/counter-reducer";
+import {setMaxValueAC, setStartValueAC} from "./state/counter-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "./state/store";
 
@@ -18,7 +18,6 @@ export function Settings({setInputValueError, inputValueError}: SettingsPropsTyp
     useEffect(() => settings(), [])
 
     const settings = () => {
-        dispatch(setCountStartValueAC(startInputValue))
         dispatch(setMaxValueAC(maxInputValue))
         dispatch(setStartValueAC(startInputValue))
         localStorage.setItem("start", startInputValue.toString());
