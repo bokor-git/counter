@@ -4,8 +4,8 @@ type initStateType = {
     maxValue: number
 }
 
-let storageStartValue = Number(localStorage.getItem('start'))
-let storageMaxValue = Number(localStorage.getItem('max'))
+let storageStartValue =Number(localStorage.getItem('start'))
+let storageMaxValue =Number(localStorage.getItem('max'))
 
 let initState: initStateType = {
     count: 0,
@@ -46,9 +46,9 @@ export const counterReducer = (state = initState, action: actionTypes): initStat
         case "SET-COUNT-START-VALUE":
             return {...state, count: action.start}
         case "SET-MAX-VALUE":
-            return {...state, count: action.max}
+            return {...state, maxValue: action.max}
         case "SET-START-VALUE":
-            return {...state, count: action.start}
+            return {...state, starValue: action.start}
         default:
             return {...state}
     }

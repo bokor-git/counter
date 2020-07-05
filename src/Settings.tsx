@@ -12,12 +12,10 @@ type SettingsPropsType = {
 
 export function Settings({setSettings, setInputValueError, inputValueError,storageStartValue,storageMaxValue}: SettingsPropsType) {
 
-
     useEffect(() => settings(), [])
 
     let [maxInputValue, setMaxInputValue] = useState<number>(storageMaxValue||0)
     let [startInputValue, setStartInputValue] = useState<number>(storageStartValue||0)
-
 
     if (startInputValue >= maxInputValue || startInputValue < 0) {
         setInputValueError(true)

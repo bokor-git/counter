@@ -15,11 +15,11 @@ import {
 
 function AppRedux() {
 
-//=================> Data From LocalStorage
 
 //=================> Counter State
     let count = useSelector<AppStateType, number>(state => state.counter.count)
     let dispatch = useDispatch()
+    // useEffect(() => setStorageData(), [])
     let [error, setError] = useState<boolean>(false)
     let starValue = useSelector<AppStateType, number>(state => state.counter.starValue)
     let maxValue = useSelector<AppStateType, number>(state => state.counter.maxValue)
@@ -66,8 +66,8 @@ function AppRedux() {
                 inputValueError={inputValueError}
                 setInputValueError={setInputValueError}
                 setSettings={setSettings}
-                storageStartValue={storageStartValue}
-                storageMaxValue={storageMaxValue}
+                storageStartValue={starValue}
+                storageMaxValue={maxValue}
             />
         </div>
     );
